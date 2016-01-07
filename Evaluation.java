@@ -61,12 +61,12 @@ public class Evaluation {
 		Hashtable<String,String> pc = new Hashtable<String,String>();
 		File file=new File(args[0].toString());   
         pc=predictionClass(file);            
-        for(String c: ClassSet){  
+        for(String c: ClassSet){  //遍历类集合
             Enumeration<String>  e = pc.keys();
-            while( e.hasMoreElements() ){
+            while( e.hasMoreElements() ){  
              a=e.nextElement();
-             String[] part =a.split(":");
-             b=pc.get(a);
+             String[] part =a.split(":");    //part[0]是真实类名
+             b=pc.get(a);   //b是预测类名
              if((c.equals(part[0]))&&c.equals(b)) TP++;   
              else if(c.equals(part[0])&&!c.equals(b)) FN++;
              else if(!c.equals(part[0])&&c.equals(b)) FP++;
