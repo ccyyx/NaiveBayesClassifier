@@ -33,6 +33,6 @@ pre(){
 		getTestData $count
 	fi	
 }
-
+mkdir /root/NBCorpus/NBCorpus/CountryTest
 pre /root/NBCorpus/NBCorpus/CountryTrain
 

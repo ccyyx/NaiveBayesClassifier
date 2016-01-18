@@ -12,9 +12,9 @@ import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class CountryTrain {	
+public class IndustryTrain {	
     //读取train文件,输入格式为：类名	单词 单词 ...... 
-    public static class CountryTrainMap extends Mapper<Text, Text, Text, IntWritable> {
+    public static class IndustryTrainMap extends Mapper<Text, Text, Text, IntWritable> {
 		private final IntWritable one = new IntWritable(1);         
 		private Text class_word = new Text();	
         public void map(Text key, Text value, Context context) throws IOException, InterruptedException {  			
@@ -26,7 +26,7 @@ public class CountryTrain {
             } 
         }
     }
-	public static class CountryTrainReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
+	public static class IndustryTrainReduce extends Reducer<Text, IntWritable, Text, IntWritable> {
 
 		public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
 			int sum = 0;  
@@ -39,11 +39,11 @@ public class CountryTrain {
     public static void main(String[] args) throws Exception {
         Configuration conf = new Configuration();  
         Job job = new Job(conf);  
-        job.setJarByClass(CountryTrain.class); 		
+        job.setJarByClass(IndustryTrain.class); 		
         job.setOutputKeyClass(Text.class);  
         job.setOutputValueClass(IntWritable.class);   
-        job.setMapperClass(CountryTrainMap.class);  
-        job.setReducerClass(CountryTrainReduce.class);   
+        job.setMapperClass(IndustryTrainMap.class);  
+        job.setReducerClass(IndustryTrainReduce.class);   
         job.setInputFormatClass(SequenceFileInputFormat.class);  
         job.setOutputFormatClass(TextOutputFormat.class);   
         FileInputFormat.addInputPath(job,new Path(args[0]));  
